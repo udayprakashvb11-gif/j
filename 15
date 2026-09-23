@@ -1,0 +1,175 @@
+import java.sql.*;
+import java.util.Scanner;
+
+public class ex15 {
+
+    static final String URL = "jdbc:mysql://sql.freedb.tech/freedb_bsVOiTyJ";
+    static final String USER = "u_2c76qE";
+    static final String PASSWORD = "UKxEJVaF0FY8";
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            // Connect to database
+            Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+            System.out.println("==============================");
+            System.out.println("   JDBC DATABASE CONNECTED");
+            System.out.println("==============================");
+
+            int choice;
+
+            do {
+                System.out.println("\n===== STUDENT DATABASE =====");
+                System.out.println("1. Insert Student");
+                System.out.println("2. Display Students");
+                System.out.println("3. Update Student");
+                System.out.println("4. Delete Student");
+                System.out.println("5. Exit");
+                System.out.print("Enter your choice: ");
+
+                choice = sc.nextInt();
+
+                switch (choice) {
+
+                    // INSERT
+                    case 1:
+                        System.out.print("Enter Student ID: ");
+                        int id = sc.nextInt();
+
+                        sc.nextLine();
+
+                        System.out.print("Enter Student Name: ");
+                        String name = sc.nextLine();
+
+                        System.out.print("Enter Marks: ");
+                        int marks = sc.nextInt();
+
+                        String insertQuery =
+                                "INSERT INTO student VALUES (?, ?, ?)";
+
+                        PreparedStatement insertStmt =
+                                con.prepareStatement(insertQuery);
+
+                        insertStmt.setInt(1, id);
+                        insertStmt.setString(2, name);
+                        insertStmt.setInt(3, marks);
+
+                        int inserted = insertStmt.executeUpdate();
+
+                        if (inserted > 0) {
+                            System.out.println(
+                                    "Student inserted successfully!");
+                        }
+
+                        insertStmt.close();
+                        break;
+
+                    // DISPLAY
+                    case 2:
+                        String selectQuery = "SELECT * FROM student";
+
+                        Statement stmt = con.createStatement();
+
+                        ResultSet rs = stmt.executeQuery(selectQuery);
+
+                        System.out.println("\n------------------------------");
+                        System.out.println("ID\tName\tMarks");
+                        System.out.println("------------------------------");
+
+                        while (rs.next()) {
+                            int sid = rs.getInt("id");
+                            String sname = rs.getString("name");
+                            int smarks = rs.getInt("marks");
+
+                            System.out.println(
+                                    sid + "\t" +
+                                    sname + "\t" +
+                                    smarks);
+                        }
+
+                        rs.close();
+                        stmt.close();
+                        break;
+
+                    // UPDATE
+                    case 3:
+                        System.out.print("Enter Student ID to update: ");
+                        int updateId = sc.nextInt();
+
+                        System.out.print("Enter new marks: ");
+                        int newMarks = sc.nextInt();
+
+                        String updateQuery =
+                                "UPDATE student SET marks = ? WHERE id = ?";
+
+                        PreparedStatement updateStmt =
+                                con.prepareStatement(updateQuery);
+
+                        updateStmt.setInt(1, newMarks);
+                        updateStmt.setInt(2, updateId);
+
+                        int updated = updateStmt.executeUpdate();
+
+                        if (updated > 0) {
+                            System.out.println(
+                                    "Student updated successfully!");
+                        } else {
+                            System.out.println(
+                                    "Student ID not found.");
+                        }
+
+                        updateStmt.close();
+                        break;
+
+                    // DELETE
+                    case 4:
+                        System.out.print("Enter Student ID to delete: ");
+                        int deleteId = sc.nextInt();
+
+                        String deleteQuery =
+                                "DELETE FROM student WHERE id = ?";
+
+                        PreparedStatement deleteStmt =
+                                con.prepareStatement(deleteQuery);
+
+                        deleteStmt.setInt(1, deleteId);
+
+                        int deleted = deleteStmt.executeUpdate();
+
+                        if (deleted > 0) {
+                            System.out.println(
+                                    "Student deleted successfully!");
+                        } else {
+                            System.out.println(
+                                    "Student ID not found.");
+                        }
+
+                        deleteStmt.close();
+                        break;
+
+                    // EXIT
+                    case 5:
+                        System.out.println("Exiting program...");
+                        break;
+
+                    default:
+                        System.out.println("Invalid choice!");
+                }
+
+            } while (choice != 5);
+
+            // Close connection
+            con.close();
+
+            System.out.println("Database connection closed.");
+
+        } catch (SQLException e) {
+            System.out.println("Database Error: " + e.getMessage());
+        }
+
+        sc.close();
+    }
+}
