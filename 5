@@ -1,0 +1,90 @@
+BasicMath.java
+package mathoperations;
+
+public class BasicMath {
+
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int subtract(int a, int b) {
+        return a - b;
+    }
+}
+AdvancedMath.java
+package mathoperations;
+
+public class AdvancedMath {
+
+    public int multiply(int a, int b) {
+        return a * b;
+    }
+
+    public int square(int a) {
+        return a * a;
+    }
+}
+Experiment5.java
+import mathoperations.*;
+
+public class Experiment5 {
+
+    public static void main(String[] args) {
+
+        BasicMath b = new BasicMath();
+        AdvancedMath a = new AdvancedMath();
+
+        System.out.println("Addition: " + b.add(10, 5));
+        System.out.println("Subtraction: " + b.subtract(10, 5));
+        System.out.println("Multiplication: " + a.multiply(10, 5));
+        System.out.println("Square: " + a.square(5));
+    }
+}
+2. Experiment 5 — utilities Package
+StringHelper.java
+package utilities;
+
+public class StringHelper {
+
+    public String upper(String s) {
+        return s.toUpperCase();
+    }
+
+    public int length(String s) {
+        return s.length();
+    }
+}
+ArrayHelper.java
+package utilities;
+
+public class ArrayHelper {
+
+    public int sum(int[] a) {
+
+        int sum = 0;
+
+        for (int n : a) {
+            sum = sum + n;
+        }
+
+        return sum;
+    }
+}
+Experiment5.java
+import utilities.*;
+
+public class Experiment5 {
+
+    public static void main(String[] args) {
+
+        StringHelper s = new StringHelper();
+        ArrayHelper a = new ArrayHelper();
+
+        System.out.println("Uppercase: " + s.upper("java"));
+        System.out.println("Length: " + s.length("Java"));
+
+        int[] n = {10, 20, 30};
+
+        System.out.println("Array Sum: " + a.sum(n));
+    }
+}
