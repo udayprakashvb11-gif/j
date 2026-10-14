@@ -1,0 +1,69 @@
+Program 12
+import java.util.*;
+public class javaexp12 {
+
+    public static void main(String[] args) {
+
+        LinkedList<String> list = new LinkedList<>();
+
+        list.add("India");
+        list.add("USA");
+        list.add("UK");
+        list.add("Canada");
+
+        System.out.println("List: " + list);
+
+        // 1. Forward traversal
+        ListIterator<String> it = list.listIterator();
+
+        System.out.println("\nForward:");
+        while (it.hasNext())
+            System.out.println(it.next());
+
+        // 2. Backward traversal
+        System.out.println("\nBackward:");
+        while (it.hasPrevious())
+            System.out.println(it.previous());
+
+        // 3. set()
+        it = list.listIterator();
+        while (it.hasNext()) {
+            if (it.next().equals("USA"))
+                it.set("United States");
+        }
+        System.out.println("\nAfter set(): " + list);
+
+        // 4. add()
+        it = list.listIterator();
+        while (it.hasNext()) {
+            if (it.next().equals("Canada"))
+                it.add("Japan");
+        }
+        System.out.println("After add(): " + list);
+
+        // 5. remove()
+        it = list.listIterator();
+        while (it.hasNext()) {
+            if (it.next().equals("Japan"))
+                it.remove();
+        }
+        System.out.println("After remove(): " + list);
+
+        // 6. Index methods
+        it = list.listIterator(2);
+        System.out.println("\nNext Index: " + it.nextIndex());
+        System.out.println("Previous Index: " + it.previousIndex());
+
+        // 7. LinkedList operations
+        list.addFirst("Start");
+        list.addLast("End");
+
+        System.out.println("\nFirst: " + list.getFirst());
+        System.out.println("Last: " + list.getLast());
+
+        list.removeFirst();
+        list.removeLast();
+
+        System.out.println("Final List: " + list);
+    }
+}
