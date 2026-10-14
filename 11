@@ -1,0 +1,65 @@
+program 11: FINAL                                                                import java.util.*;
+
+public class Experiment11 {
+    public static void main(String[] args) {
+
+        ArrayList<String> list = new ArrayList<>();
+
+        // INSERTION
+
+        // 1. add()
+        list.add("Apple");
+        list.add("Banana");
+        System.out.println("1. add(): " + list);
+
+        // 2. add(index, element)
+        list.add(1, "Mango");
+        System.out.println("2. add(index): " + list);
+
+        // 3. addAll()
+        list.addAll(Arrays.asList("Orange", "Grapes"));
+        System.out.println("3. addAll(): " + list);
+
+        // 4. addAll(index, collection)
+        list.addAll(2, Arrays.asList("Kiwi", "Guava"));
+        System.out.println("4. addAll(index): " + list);
+
+
+        // DELETION
+
+        // 5. remove(index)
+        list.remove(0);
+        System.out.println("5. remove(index): " + list);
+
+        // 6. remove(object)
+        list.remove("Mango");
+        System.out.println("6. remove(object): " + list);
+
+        // 7. removeAll()
+        list.removeAll(Arrays.asList("Orange", "Grapes"));
+        System.out.println("7. removeAll(): " + list);
+
+        // 8. removeIf()
+        list.removeIf(x -> x.startsWith("K"));
+        System.out.println("8. removeIf(): " + list);
+
+        // 9. Iterator remove()
+        Iterator<String> it = list.iterator();
+        while (it.hasNext()) {
+            if (it.next().equals("Guava"))
+                it.remove();
+        }
+        System.out.println("9. Iterator remove(): " + list);
+
+        // Add elements for retainAll()
+        list.addAll(Arrays.asList("Apple", "Banana", "Cherry"));
+
+        // 10. retainAll()
+        list.retainAll(Arrays.asList("Apple", "Banana"));
+        System.out.println("10. retainAll(): " + list);
+
+        // 11. clear()
+        list.clear();
+        System.out.println("11. clear(): " + list);
+    }
+}
