@@ -1,0 +1,42 @@
+Experiment 6
+interface Student {
+
+    void study();
+    void write();
+    void attendClass();
+}
+
+class CollegeStudent implements Student {
+
+    @Override
+    public void study() {
+        System.out.println("Student is studying.");
+    }
+
+    @Override
+    public void write() {
+        System.out.println("Student is writing notes.");
+    }
+
+    @Override
+    public void attendClass() {
+        System.out.println("Student is attending the class.");
+    }
+
+    public void eat() {
+        System.out.println("Student is eating lunch.");
+    }
+}
+
+public class exp6 {
+
+    public static void main(String[] args) {
+
+        CollegeStudent s = new CollegeStudent();
+
+        s.study();
+        s.write();
+        s.attendClass();
+        s.eat();
+    }
+}
