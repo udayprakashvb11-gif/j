@@ -1,0 +1,102 @@
+Experiment 7A: exceptions
+import java.io.*;
+
+public class ExceptionDemo {
+    public static void main(String[] args) {
+
+        // 1. ArithmeticException
+        try {
+            int a = 10 / 0;
+        } catch (ArithmeticException e) {
+            System.out.println("ArithmeticException");
+        }
+
+        // 2. ArrayIndexOutOfBoundsException
+        try {
+            int a[] = {1, 2, 3};
+            System.out.println(a[5]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ArrayIndexOutOfBoundsException");
+        }
+
+        // 3. NullPointerException
+        try {
+            String s = null;
+            s.length();
+        } catch (NullPointerException e) {
+            System.out.println("NullPointerException");
+        }
+
+        // 4. NumberFormatException
+        try {
+            int n = Integer.parseInt("abc");
+        } catch (NumberFormatException e) {
+            System.out.println("NumberFormatException");
+        }
+
+        // 5. IOException
+        try {
+            throw new IOException();
+        } catch (IOException e) {
+            System.out.println("IOException");
+        }
+
+        // 6. ClassCastException
+        try {
+            Object obj = "Java";
+            Integer n = (Integer) obj;
+        } catch (ClassCastException e) {
+            System.out.println("ClassCastException");
+        }
+
+        // 7. FileNotFoundException
+        try {
+            FileReader f = new FileReader("abc.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("FileNotFoundException");
+        }
+    }
+}
+
+
+
+
+
+
+Experiment:7B basic try catch throw throws
+
+public class ExceptionHandling {
+
+    // throws
+    static void divide(int a, int b) throws ArithmeticException {
+        if (b == 0)
+            throw new ArithmeticException("Cannot divide by zero");
+
+        System.out.println("Result: " + a / b);
+    }
+
+    public static void main(String[] args) {
+
+        // Basic Try-Catch + throw + throws
+        try {
+            divide(10, 0);
+        } catch (ArithmeticException e) {
+            System.out.println("Cannot divide by zero");
+        }
+
+        // Nested Try-Catch
+        try {
+            System.out.println("Outer Try");
+
+            try {
+                int arr[] = {1, 2, 3};
+                System.out.println(arr[5]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Nested Catch: Invalid array");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Outer Catch");
+        }
+    }
+}
