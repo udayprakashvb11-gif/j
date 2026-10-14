@@ -1,0 +1,96 @@
+Experiment 3
+    class Calculator {
+
+    // 1. Overloading by Number of Parameters
+    void add(int a, int b) {
+        System.out.println("Number of Parameters (2): " + (a + b));
+    }
+
+    void add(int a, int b, int c) {
+        System.out.println("Number of Parameters (3): " + (a + b + c));
+    }
+
+
+    // 2. Overloading by Type of Parameters
+    void add(double a, double b) {
+        System.out.println("Type of Parameters (double): " + (a + b));
+    }
+
+    void add(String a, String b) {
+        System.out.println("Type of Parameters (String): " + a + b);
+    }
+
+
+    // 3. Overloading by Order of Parameters
+    void show(String s, int n) {
+        System.out.println("Order (String, int): " + s + n);
+    }
+
+    void show(int n, String s) {
+        System.out.println("Order (int, String): " + n + s);
+    }
+
+
+    // 4. Multiply Operations
+    void multiply(int a, int b) {
+        System.out.println("Multiply 2 numbers: " + a * b);
+    }
+
+    void multiply(int a, int b, int c) {
+        System.out.println("Multiply 3 numbers: " + a * b * c);
+    }
+}
+
+
+// 5. Area Calculator
+class Area {
+
+    void area(int side) {
+        System.out.println("Square Area: " + side * side);
+    }
+
+    void area(int length, int breadth) {
+        System.out.println("Rectangle Area: " + length * breadth);
+    }
+
+    void area(double radius) {
+        System.out.println("Circle Area: " + 3.14 * radius * radius);
+    }
+}
+
+
+public class exp3{
+    public static void main(String[] args) {
+
+        Calculator c = new Calculator();
+
+        System.out.println("===== METHOD OVERLOADING =====");
+
+        // Number of Parameters
+        c.add(10, 20);
+        c.add(10, 20, 30);
+
+        // Type of Parameters
+        c.add(5.5, 5.5);
+        c.add("Hello ", "Java");
+
+        // Order of Parameters
+        c.show("Value: ", 100);
+        c.show(200, " is number");
+
+
+        // Multiply Operations
+        System.out.println("\n===== MULTIPLY OPERATIONS =====");
+        c.multiply(5, 3);
+        c.multiply(2, 3, 4);
+
+
+        // Area Calculator
+        System.out.println("\n===== AREA CALCULATOR =====");
+
+        Area a = new Area();
+        a.area(5);
+        a.area(10, 5);
+        a.area(7.0);
+    }
+}
