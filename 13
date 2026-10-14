@@ -1,0 +1,80 @@
+Program 13
+import javax.swing.*;
+import java.awt.*;
+
+public class Experiment13 extends JFrame {
+
+    JTextField name = new JTextField(10);
+    JPasswordField pass = new JPasswordField(10);
+    JRadioButton male = new JRadioButton("Male"),
+                 female = new JRadioButton("Female");
+    JCheckBox java = new JCheckBox("Java"),
+              python = new JCheckBox("Python");
+    JComboBox<String> course =
+            new JComboBox<>(new String[]{"BCA","BSc","MSc"});
+    JSpinner age =
+            new JSpinner(new SpinnerNumberModel(18,15,60,1));
+    JSlider exp = new JSlider(0,10,0);
+    JTextArea address = new JTextArea(3,10),
+              output = new JTextArea(5,20);
+    JButton submit = new JButton("Submit"),
+            clear = new JButton("Clear");
+
+    public Experiment13() {
+
+        setTitle("Student Form");
+        setSize(450,500);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new FlowLayout());
+
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(male); bg.add(female);
+
+        add(new JLabel("Name")); add(name);
+        add(new JLabel("Password")); add(pass);
+        add(new JLabel("Age")); add(age);
+        add(male); add(female);
+        add(new JLabel("Course")); add(course);
+        add(java); add(python);
+        add(new JLabel("Experience")); add(exp);
+        add(new JScrollPane(address));
+        add(submit); add(clear);
+        add(new JScrollPane(output));
+
+        submit.addActionListener(e -> {
+            String gender = male.isSelected() ? "Male" :
+                           female.isSelected() ? "Female" : "";
+            String skills = "";
+            if(java.isSelected()) skills += "Java ";
+            if(python.isSelected()) skills += "Python";
+
+            output.setText(
+                "Name: " + name.getText() +
+                "\nAge: " + age.getValue() +
+                "\nGender: " + gender +
+                "\nCourse: " + course.getSelectedItem() +
+                "\nSkills: " + skills +
+                "\nExperience: " + exp.getValue() +
+                "\nAddress: " + address.getText()
+            );
+
+            JOptionPane.showMessageDialog(this,"Registration Successful");
+        });
+
+        clear.addActionListener(e -> {
+            name.setText("");
+            pass.setText("");
+            bg.clearSelection();
+            java.setSelected(false);
+            python.setSelected(false);
+            address.setText("");
+            output.setText("");
+        });
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Launching GUI...");
+        SwingUtilities.invokeLater(() ->
+                new Experiment13().setVisible(true));
+    }
+}
