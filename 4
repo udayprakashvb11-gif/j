@@ -1,0 +1,127 @@
+Experiment 4: single inheritance 
+class Animal {
+    void eat() {
+        System.out.println("Animal eats");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class single {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.eat();
+        d.bark();
+    }
+}
+
+
+Experiment 4: Multilevel inheritance 
+class Animal1 {
+    void eat() {
+        System.out.println("Animal eats");
+    }
+}
+
+class Dog1 extends Animal1 {
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Puppy extends Dog1 {
+    void play() {
+        System.out.println("Puppy plays");
+    }
+}
+
+public class multilevel {
+    public static void main(String[] args) {
+
+        Puppy p = new Puppy();
+
+        p.eat();
+        p.bark();
+        p.play();
+    }
+}
+
+
+
+Experiment 4: Hierarchical inheritance 
+class Animal2 {
+    void eat() {
+        System.out.println("Animal eats");
+    }
+}
+
+class Dog2 extends Animal2 {
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Cat2 extends Animal2 {
+    void meow() {
+        System.out.println("Cat meows");
+    }
+}
+
+public class hiearchical {
+    public static void main(String[] args) {
+
+        Dog2 d = new Dog2();
+        d.eat();
+        d.bark();
+
+        Cat2 c = new Cat2();
+        c.eat();
+        c.meow();
+    }
+}
+
+
+
+Experiment 4 Hybrid inheritance 
+interface Animal {
+    void eat();
+}
+
+interface Pet {
+    void play();
+}
+
+class Dog {
+    public void bark() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Puppy extends Dog implements Animal, Pet {
+
+    @Override
+    public void eat() {
+        System.out.println("Puppy eats");
+    }
+
+    @Override
+    public void play() {
+        System.out.println("Puppy plays");
+    }
+}
+
+public class hybrid {
+
+    public static void main(String[] args) {
+
+        Puppy p = new Puppy();
+
+        p.bark();
+        p.eat();
+        p.play();
+    }
+}
