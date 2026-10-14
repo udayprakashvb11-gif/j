@@ -1,0 +1,64 @@
+Program : 8
+import java.util.Scanner;
+
+class InsufficientBalanceException extends Exception {
+    InsufficientBalanceException(String msg) {
+        super(msg);
+    }
+}
+
+class InvalidPinException extends Exception {
+    InvalidPinException(String msg) {
+        super(msg);
+    }
+}
+
+class DailyLimitException extends Exception {
+    DailyLimitException(String msg) {
+        super(msg);
+    }
+}
+
+class BankAccount {
+    double balance = 50000;
+    int pin = 1234;
+    double withdrawn = 0;
+
+    void withdraw(int p, double amount)
+            throws InvalidPinException, InsufficientBalanceException,
+            DailyLimitException {
+
+        if (p != pin)
+            throw new InvalidPinException("Invalid PIN");
+        if (amount > balance)
+            throw new InsufficientBalanceException("Insufficient Balance");
+        if (withdrawn + amount > 20000)
+            throw new DailyLimitException("Daily Limit Exceeded");
+
+        balance -= amount;
+        withdrawn += amount;
+        System.out.println("Withdrawal Successful");
+        System.out.println("Balance: Rs." + balance);
+    }
+}
+
+public class Experiment8 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        BankAccount a = new BankAccount();
+
+        System.out.print("Enter PIN: ");
+        int pin = sc.nextInt();
+
+        System.out.print("Enter amount: ");
+        double amount = sc.nextDouble();
+
+        try {
+            a.withdraw(pin, amount);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        sc.close();
+    }
+}
