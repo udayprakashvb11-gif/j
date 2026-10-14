@@ -1,0 +1,33 @@
+```program 9 
+java
+class T1 extends Thread {
+    public void run() {
+        System.out.println("Thread 1");
+    }
+}
+
+class T2 implements Runnable {
+    public void run() {
+        System.out.println("Thread 2");
+    }
+}
+
+public class exp {
+    public static void main(String[] args) {
+        T1 t1 = new T1();
+        Thread t2 = new Thread(new T2());
+
+        t1.setPriority(1);
+        t2.setPriority(10);
+
+        System.out.println("T1 ID: " + t1.getId());
+        System.out.println("T1 Priority: " + t1.getPriority());
+
+        System.out.println("T2 ID: " + t2.getId());
+        System.out.println("T2 Priority: " + t2.getPriority());
+
+        t1.start();
+        t2.start();
+    }
+}
+```
