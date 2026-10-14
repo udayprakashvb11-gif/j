@@ -1,0 +1,96 @@
+Experiment 14
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Experiment14 extends JFrame {
+
+    JTextArea t = new JTextArea();
+
+    Experiment14() {
+        setTitle("Event Handling");
+        setSize(600, 500);
+        setLayout(new GridLayout(4, 2));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // 1. ActionListener
+        JButton b = new JButton("Click");
+        b.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                t.append("Button clicked\n");
+            }
+        });
+        add(b);
+
+        // 2. MouseListener
+        JLabel m = new JLabel("Mouse");
+        m.addMouseListener(new MouseListener() {
+            public void mouseClicked(MouseEvent e) { t.append("Clicked\n"); }
+            public void mousePressed(MouseEvent e) { t.append("Pressed\n"); }
+            public void mouseReleased(MouseEvent e) { t.append("Released\n"); }
+            public void mouseEntered(MouseEvent e) { t.append("Entered\n"); }
+            public void mouseExited(MouseEvent e) { t.append("Exited\n"); }
+        });
+        add(m);
+
+        // 3. KeyListener
+        JTextField k = new JTextField("Type");
+        k.addKeyListener(new KeyListener() {
+            public void keyTyped(KeyEvent e) { t.append("Typed\n"); }
+            public void keyPressed(KeyEvent e) { t.append("Pressed\n"); }
+            public void keyReleased(KeyEvent e) { t.append("Released\n"); }
+        });
+        add(k);
+
+        // 4. ItemListener
+        JCheckBox c = new JCheckBox("Option");
+        c.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                t.append("Item changed\n");
+            }
+        });
+        add(c);
+
+        // 5. FocusListener
+        JTextField f = new JTextField("Focus");
+        f.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent e) {
+                t.append("Focus gained\n");
+            }
+            public void focusLost(FocusEvent e) {
+                t.append("Focus lost\n");
+            }
+        });
+        add(f);
+
+        // 6. MouseMotionListener
+        JLabel mm = new JLabel("Move Mouse");
+        mm.addMouseMotionListener(new MouseMotionListener() {
+            public void mouseMoved(MouseEvent e) {
+                t.append("Mouse moved\n");
+            }
+            public void mouseDragged(MouseEvent e) {
+                t.append("Mouse dragged\n");
+            }
+        });
+        add(mm);
+
+        // 7. WindowListener
+        addWindowListener(new WindowListener() {
+            public void windowOpened(WindowEvent e) { t.append("Opened\n"); }
+            public void windowClosing(WindowEvent e) { System.exit(0); }
+            public void windowClosed(WindowEvent e) {}
+            public void windowIconified(WindowEvent e) { t.append("Minimized\n"); }
+            public void windowDeiconified(WindowEvent e) { t.append("Restored\n"); }
+            public void windowActivated(WindowEvent e) {}
+            public void windowDeactivated(WindowEvent e) {}
+        });
+
+        add(new JScrollPane(t));
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Experiment14();
+    }
+}
